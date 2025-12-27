@@ -19,5 +19,5 @@ runs:
         VERSION: ${{ inputs.version }}
 
 branding:
-  icon: activity
-  color: white
+  icon: link
+  color: yellow
