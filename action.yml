@@ -1,5 +1,5 @@
-name: github-actions-composite-template
-description: GitHub Actions Composite Template
+name: tauri-action
+description: Build Tauri apps with GitHub Actions
 author: remarkablemark
 
 inputs:
