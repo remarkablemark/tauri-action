@@ -20,7 +20,7 @@ jobs:
         with:
           app-name: Test App Name
 
-      - name: Check project
+      - name: Assert outputs
         shell: bash
         run: |
           if [[ "$(tauri --version)" != 'tauri-cli 2.'* ]]; then
@@ -53,7 +53,7 @@ jobs:
           force: true
           cli-version: 2.8.4
 
-      - name: Check project
+      - name: Assert outputs
         shell: bash
         run: |
           if [[ "$(tauri --version)" != 'tauri-cli 2.8.4' ]]; then

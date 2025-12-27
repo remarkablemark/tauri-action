@@ -29,7 +29,7 @@ runs:
   steps:
     - name: Install Tauri CLI
       shell: bash
-      run: npm install --global @tauri-apps/cli@$CLI_VERSION
+      run: npm install --global "@tauri-apps/cli@$CLI_VERSION"
       env:
         CLI_VERSION: ${{ inputs.cli-version }}
 
@@ -37,10 +37,10 @@ runs:
       shell: bash
       run: >
         tauri init
-        --app-name $APP_NAME
-        --window-title $WINDOW_NAME
-        --frontend-dist $FRONTEND_DIST
-        --before-build-command $BEFORE_BUILD_COMMAND
+        --app-name "$APP_NAME"
+        --window-title "$WINDOW_NAME"
+        --frontend-dist "$FRONTEND_DIST"
+        --before-build-command "$BEFORE_BUILD_COMMAND"
         --ci
         ${{ inputs.force == 'true' && '--force' || '' }}
       env:
