@@ -20,7 +20,7 @@ inputs:
   force:
     description: Force init to overwrite the src-tauri folder
     default: false
-  version:
+  cli-version:
     description: Tauri CLI version
     default: 2
 
@@ -29,9 +29,9 @@ runs:
   steps:
     - name: Install Tauri CLI
       shell: bash
-      run: npm install --global @tauri-apps/cli@$VERSION
+      run: npm install --global @tauri-apps/cli@$CLI_VERSION
       env:
-        VERSION: ${{ inputs.version }}
+        CLI_VERSION: ${{ inputs.cli-version }}
 
     - name: Initialize Tauri project
       shell: bash

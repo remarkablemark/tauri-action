@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Build Tauri app
         uses: remarkablemark/tauri-action@v1
+        with:
+          app-name: My App Name
 ```
 
 ## Usage
@@ -25,6 +27,8 @@ jobs:
 
 ```yaml
 - uses: remarkablemark/tauri-action@v1
+  with:
+    app-name: My App Name
 ```
 
 See [action.yml](action.yml)
@@ -91,14 +95,14 @@ See [action.yml](action.yml)
     force: true
 ```
 
-### `version`
+### `cli-version`
 
 **Optional**: The [CLI version](https://www.npmjs.com/package/@tauri-apps/cli?activeTab=versions). Defaults to `2`:
 
 ```yaml
 - uses: remarkablemark/tauri-action@v1
   with:
-    version: 2
+    cli-version: 2
 ```
 
 ## License
