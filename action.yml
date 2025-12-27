@@ -3,9 +3,25 @@ description: Build Tauri apps with GitHub Actions
 author: remarkablemark
 
 inputs:
-  version:
-    description: CLI version
-    required: false
+  app-name:
+    description: Name of your Tauri application
+    required: true
+  window-title:
+    description: Window title of your Tauri application (defaults to app name)
+  tauri-path:
+    description: Path of the Tauri project to use (relative to the cwd)
+    default: .
+  frontend-dist:
+    description: Web assets location, relative to <project-dir>/src-tauri
+    default: ../dist
+  before-build-command:
+    description: A shell command to run before `tauri build` kicks in
+    default: exit 0
+  force:
+    description: Force init to overwrite the src-tauri folder
+    default: false
+  cli-version:
+    description: Tauri CLI version
     default: 2
 
 runs:
@@ -13,9 +29,25 @@ runs:
   steps:
     - name: Install Tauri CLI
       shell: bash
-      run: npm install --global @tauri-apps/cli@$VERSION
+      run: npm install --global "@tauri-apps/cli@$CLI_VERSION"
       env:
-        VERSION: ${{ inputs.version }}
+        CLI_VERSION: ${{ inputs.cli-version }}
+
+    - name: Initialize Tauri project
+      shell: bash
+      run: >
+        tauri init
+        --app-name "$APP_NAME"
+        --window-title "$WINDOW_NAME"
+        --frontend-dist "$FRONTEND_DIST"
+        --before-build-command "$BEFORE_BUILD_COMMAND"
+        --ci
+        ${{ inputs.force == 'true' && '--force' || '' }}
+      env:
+        APP_NAME: ${{ inputs.app-name }}
+        WINDOW_NAME: ${{ inputs.window-name || inputs.app-name }}
+        FRONTEND_DIST: ${{ inputs.frontend-dist }}
+        BEFORE_BUILD_COMMAND: ${{ inputs.before-build-command }}
 
 branding:
   icon: link
