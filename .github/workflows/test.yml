@@ -18,7 +18,25 @@ jobs:
       - name: Run action
         uses: ./
 
+      - name: Check version
+        shell: bash
+        run: |
+          if [[ "$(tauri --version)" != 'tauri-cli 2.'* ]]; then
+            echo 'Version does not match. See version below:'
+            tauri --version
+            exit 1
+          fi
+
       - name: Run action with version
         uses: ./
         with:
-          version: 2.3.4
+          version: 2.8.4
+
+      - name: Check version
+        shell: bash
+        run: |
+          if [[ "$(tauri --version)" != 'tauri-cli 2.8.4' ]]; then
+            echo 'Version does not match. See version below:'
+            tauri --version
+            exit 1
+          fi

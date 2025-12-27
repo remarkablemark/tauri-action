@@ -33,12 +33,12 @@ See [action.yml](action.yml)
 
 ### `version`
 
-**Optional**: The version. Defaults to `1.2.3`:
+**Optional**: The [CLI version](https://www.npmjs.com/package/@tauri-apps/cli?activeTab=versions). Defaults to `2`:
 
 ```yaml
 - uses: remarkablemark/tauri-action@v1
   with:
-    version: 1.2.3
+    version: 2
 ```
 
 ## License
