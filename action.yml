@@ -4,17 +4,16 @@ author: remarkablemark
 
 inputs:
   version:
-    description: Version
+    description: CLI version
     required: false
-    default: 1.2.3
+    default: 2
 
 runs:
   using: composite
   steps:
-    - name: Print version
+    - name: Install Tauri CLI
       shell: bash
-      run: |
-        echo "version: $VERSION"
+      run: npm install --global @tauri-apps/cli@$VERSION
       env:
         VERSION: ${{ inputs.version }}
 
