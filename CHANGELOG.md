@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/remarkablemark/tauri-action/compare/v1.0.2...v1.0.3) (2025-12-28)
+
+
+### Bug Fixes
+
+* **action:** set default for input `identifier` and remove runner temp ([#12](https://github.com/remarkablemark/tauri-action/issues/12)) ([a2ed997](https://github.com/remarkablemark/tauri-action/commit/a2ed997841471bccca8d874c899b48b0e8745a24))
+
 ## [1.0.2](https://github.com/remarkablemark/tauri-action/compare/v1.0.1...v1.0.2) (2025-12-28)
 
 
