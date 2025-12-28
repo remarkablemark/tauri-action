@@ -4,6 +4,9 @@ on: [push, pull_request]
 permissions:
   contents: read
 
+env:
+  TAURI_CONF: src-tauri/tauri.conf.json
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -36,14 +39,14 @@ jobs:
           fi
 
           if [[
-            "$(jq -r .productName src-tauri/tauri.conf.json)" != 'Test App Name'
-            && "$(jq -r '.app.windows[0].title' src-tauri/tauri.conf.json)" != 'Test App Name'
-            && "$(jq -r .identifier src-tauri/tauri.conf.json)" != 'com.remarkablemark.tauri-action'
-            && "$(jq -r .build.frontendDist src-tauri/tauri.conf.json)" != '../dist'
-            && "$(jq -r .build.beforeBuildCommand src-tauri/tauri.conf.json)" != 'exit 0'
+            "$(jq -r .productName $TAURI_CONF)" != 'Test App Name'
+            && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test App Name'
+            && "$(jq -r .identifier $TAURI_CONF)" != 'com.remarkablemark.tauri-action'
+            && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
+            && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'exit 0'
           ]]; then
             echo 'Tauri configuration does not match. See JSON below:'
-            cat src-tauri/tauri.conf.json
+            cat $TAURI_CONF
             exit 1
           fi
 
@@ -78,17 +81,17 @@ jobs:
           fi
 
           if [[
-            "$(jq -r .productName src-tauri/tauri.conf.json)" != 'Test App Name'
-            && "$(jq -r .version src-tauri/tauri.conf.json)" != '1.2.3'
-            && "$(jq -r '.app.windows[0].title' src-tauri/tauri.conf.json)" != 'Test Window Title'
-            && "$(jq -r '.app.windows[0].width' src-tauri/tauri.conf.json)" != '1024'
-            && "$(jq -r '.app.windows[0].height' src-tauri/tauri.conf.json)" != '768'
-            && "$(jq -r .identifier src-tauri/tauri.conf.json)" != 'org.remarkablemark.test'
-            && "$(jq -r .build.frontendDist src-tauri/tauri.conf.json)" != '../dist'
-            && "$(jq -r .build.beforeBuildCommand src-tauri/tauri.conf.json)" != 'echo test'
+            "$(jq -r .productName $TAURI_CONF)" != 'Test App Name'
+            && "$(jq -r .version $TAURI_CONF)" != '1.2.3'
+            && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test Window Title'
+            && "$(jq -r '.app.windows[0].width' $TAURI_CONF)" != '1024'
+            && "$(jq -r '.app.windows[0].height' $TAURI_CONF)" != '768'
+            && "$(jq -r .identifier $TAURI_CONF)" != 'org.remarkablemark.test'
+            && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
+            && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'echo test'
           ]]; then
             echo 'Tauri configuration does not match. See JSON below:'
-            cat src-tauri/tauri.conf.json
+            cat $TAURI_CONF
             exit 1
           fi
 
