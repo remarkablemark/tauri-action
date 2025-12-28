@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/remarkablemark/tauri-action/compare/v1.0.1...v1.0.2) (2025-12-28)
+
+
+### Bug Fixes
+
+* **action:** replace TAURI_CONF with path ([#10](https://github.com/remarkablemark/tauri-action/issues/10)) ([40ec7f4](https://github.com/remarkablemark/tauri-action/commit/40ec7f4ee8d6c27790106c1680d446f0999438e4))
+
 ## [1.0.1](https://github.com/remarkablemark/tauri-action/compare/v1.0.0...v1.0.1) (2025-12-28)
 
 
