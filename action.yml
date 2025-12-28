@@ -78,16 +78,14 @@ runs:
           --argjson width $WIDTH \
           --argjson height $HEIGHT \
           '.version = $version | .identifier = $identifier | .app.windows[0].width = $width | .app.windows[0].height = $height' \
-          $TAURI_CONF > $TEMP_TAURI_CONF
+          src-tauri/tauri.conf.json > $RUNNER_TEMP/tauri.conf.json
 
-        mv $TEMP_TAURI_CONF $TAURI_CONF
+        mv $RUNNER_TEMP/tauri.conf.json src-tauri/tauri.conf.json
       env:
         VERSION: ${{ inputs.app-version }}
         IDENTIFIER: ${{ inputs.identifier }}
         WIDTH: ${{ inputs.window-width }}
         HEIGHT: ${{ inputs.window-height }}
-        TAURI_CONF: src-tauri/tauri.conf.json
-        TEMP_TAURI_CONF: ${{ runner.temp }}/tauri.conf.json
 
     - name: Install Linux dependencies
       if: runner.os == 'Linux'
