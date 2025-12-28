@@ -22,9 +22,6 @@ inputs:
     default: false
   identifier:
     description: Bundle identifier that must be unique across applications
-  no-sign:
-    description: Skip code signing when bundling the app
-    default: false
   tauri-version:
     description: Tauri version
     default: 2
@@ -87,10 +84,7 @@ runs:
 
     - name: Build app and generate bundles
       shell: bash
-      run: >
-        tauri build
-        --ci
-        ${{ inputs.force == 'true' && '--no-sign' || '' }}
+      run: tauri build --ci
 
 branding:
   icon: link

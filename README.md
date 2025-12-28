@@ -111,16 +111,6 @@ See [action.yml](action.yml)
     identifier: com.tauri.example
 ```
 
-### `no-sign`
-
-**Optional**: Skip code signing when bundling the app. Defaults to `false`:
-
-```yaml
-- uses: remarkablemark/tauri-action@v1
-  with:
-    no-sign: true
-```
-
 ### `tauri-version`
 
 **Optional**: The Tauri version (used by the [CLI](https://www.npmjs.com/package/@tauri-apps/cli)). Defaults to `2`:

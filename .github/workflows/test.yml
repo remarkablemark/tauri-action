@@ -61,8 +61,10 @@ jobs:
           before-build-command: echo test
           force: true
           identifier: org.remarkablemark.test
-          no-sign: true
           tauri-version: 2.9.0
+        env:
+          # https://tauri.app/distribute/sign/macos/#ad-hoc-signing
+          APPLE_SIGNING_IDENTITY: '-'
 
       - name: Assert outputs
         shell: bash
