@@ -6,6 +6,9 @@ inputs:
   app-name:
     description: Name of your Tauri application
     required: true
+  app-version:
+    description: Your application version
+    default: 0.1.0
   window-title:
     description: Window title of your Tauri application (defaults to app name)
   tauri-path:
@@ -31,7 +34,7 @@ runs:
   steps:
     - name: Install Tauri CLI
       shell: bash
-      run: npm install --global "@tauri-apps/cli@$VERSION"
+      run: npm install --global @tauri-apps/cli@$VERSION
       env:
         VERSION: ${{ inputs.tauri-version }}
 
@@ -51,6 +54,26 @@ runs:
         FRONTEND_DIST: ${{ inputs.frontend-dist }}
         BEFORE_BUILD_COMMAND: ${{ inputs.before-build-command }}
 
+    - name: Update Tauri config
+      shell: bash
+      run: |
+        if [[ -z "$IDENTIFIER" ]]; then
+          IDENTIFIER="com.${{ github.repository_owner }}.${GITHUB_REPOSITORY#*/}"
+        fi
+
+        jq \
+          --arg version $VERSION \
+          --arg identifier $IDENTIFIER \
+          '.version = $version | .identifier = $identifier' \
+          $TAURI_CONF > $TEMP_TAURI_CONF
+
+        mv $TEMP_TAURI_CONF $TAURI_CONF
+      env:
+        VERSION: ${{ inputs.app-version }}
+        IDENTIFIER: ${{ inputs.identifier }}
+        TAURI_CONF: src-tauri/tauri.conf.json
+        TEMP_TAURI_CONF: ${{ runner.temp }}/tauri.conf.json
+
     - name: Install Linux dependencies
       if: runner.os == 'Linux'
       shell: bash
@@ -68,19 +91,6 @@ runs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-
-    - name: Set app identifier
-      shell: bash
-      run: |
-        if [[ -z "$IDENTIFIER" ]]; then
-          IDENTIFIER="com.${{ github.repository_owner }}.${GITHUB_REPOSITORY#*/}"
-        fi
-        TAURI_CONF=src-tauri/tauri.conf.json
-        TEMP_TAURI_CONF=$RUNNER_TEMP/tauri.conf.json
-        jq ".identifier = \"$IDENTIFIER\"" $TAURI_CONF > $TEMP_TAURI_CONF
-        mv $TEMP_TAURI_CONF $TAURI_CONF
-      env:
-        IDENTIFIER: ${{ inputs.identifier }}
 
     - name: Build app and generate bundles
       shell: bash
