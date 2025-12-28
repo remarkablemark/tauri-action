@@ -11,6 +11,12 @@ inputs:
     default: 0.1.0
   window-title:
     description: Window title of your Tauri application (defaults to app name)
+  window-width:
+    description: Window width of your Tauri application
+    default: 800
+  window-height:
+    description: Window height of your Tauri application
+    default: 600
   tauri-path:
     description: Path of the Tauri project to use (relative to the cwd)
     default: .
@@ -64,13 +70,17 @@ runs:
         jq \
           --arg version $VERSION \
           --arg identifier $IDENTIFIER \
-          '.version = $version | .identifier = $identifier' \
+          --argjson width $WIDTH \
+          --argjson height $HEIGHT \
+          '.version = $version | .identifier = $identifier | .app.windows[0].width = $width | .app.windows[0].height = $height' \
           $TAURI_CONF > $TEMP_TAURI_CONF
 
         mv $TEMP_TAURI_CONF $TAURI_CONF
       env:
         VERSION: ${{ inputs.app-version }}
         IDENTIFIER: ${{ inputs.identifier }}
+        WIDTH: ${{ inputs.window-width }}
+        HEIGHT: ${{ inputs.window-height }}
         TAURI_CONF: src-tauri/tauri.conf.json
         TEMP_TAURI_CONF: ${{ runner.temp }}/tauri.conf.json
 

@@ -71,6 +71,26 @@ See [action.yml](action.yml)
     window-title: My Window Title
 ```
 
+### `window-width`
+
+**Optional**: The window width of your Tauri application. Defaults to `800` pixels:
+
+```yaml
+- uses: remarkablemark/tauri-action@v1
+  with:
+    window-width: 800
+```
+
+### `window-height`
+
+**Optional**: The window height of your Tauri application. Defaults to `600` pixels:
+
+```yaml
+- uses: remarkablemark/tauri-action@v1
+  with:
+    window-height: 800
+```
+
 ### `tauri-path`
 
 **Optional**: The path of the Tauri project to use (relative to the cwd). Defaults to `.`:
