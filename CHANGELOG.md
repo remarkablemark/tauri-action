@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/remarkablemark/tauri-action/compare/v1.0.0...v1.0.1) (2025-12-28)
+
+
+### Bug Fixes
+
+* **action:** override environment variable IDENTIFIER ([#8](https://github.com/remarkablemark/tauri-action/issues/8)) ([ff73435](https://github.com/remarkablemark/tauri-action/commit/ff7343518c8ed50944f8c85512fc83275dddcd0c))
+
 ## 1.0.0 (2025-12-28)
 
 
