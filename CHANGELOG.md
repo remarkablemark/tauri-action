@@ -1,0 +1,18 @@
+# Changelog
+
+## 1.0.0 (2025-12-28)
+
+
+### Features
+
+* **action:** add input `app-version` ([#5](https://github.com/remarkablemark/tauri-action/issues/5)) ([ad3b1f3](https://github.com/remarkablemark/tauri-action/commit/ad3b1f39c2814396eb102815350017e1d50d06d7))
+* **action:** add inputs `window-width` and `window-height` ([#6](https://github.com/remarkablemark/tauri-action/issues/6)) ([a530aa3](https://github.com/remarkablemark/tauri-action/commit/a530aa351b74c4389c1dcc24d62fdf104adc460a))
+* **action:** add output `bundle-path` ([#7](https://github.com/remarkablemark/tauri-action/issues/7)) ([a9120cd](https://github.com/remarkablemark/tauri-action/commit/a9120cda44ed0eab22e8b9663d203dc598561e39))
+* **action:** build Tauri app and generate bundles ([#4](https://github.com/remarkablemark/tauri-action/issues/4)) ([8c6be68](https://github.com/remarkablemark/tauri-action/commit/8c6be68e57af1b6db40537250ced2c940abcadb9))
+* **action:** init Tauri project with inputs passed as options ([96aaa38](https://github.com/remarkablemark/tauri-action/commit/96aaa38894919b26983e620b9f50d95640295235))
+* **action:** install Tauri CLI and set default version to 2 ([#1](https://github.com/remarkablemark/tauri-action/issues/1)) ([e4e4300](https://github.com/remarkablemark/tauri-action/commit/e4e4300f3155f68a4c129bc6952f7a0840ed4a69))
+
+
+### Bug Fixes
+
+* **action:** wrap variables in double quotes ([b4e5d25](https://github.com/remarkablemark/tauri-action/commit/b4e5d25310a646fcc49d087b7a31b1416e2698bc))
