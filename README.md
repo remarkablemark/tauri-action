@@ -15,27 +15,37 @@
 ```yaml
 # .github/workflows/build.yml
 on: push
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
     steps:
       - name: Build Tauri app
         uses: remarkablemark/tauri-action@v1
+        id: tauri
         with:
           app-name: My App Name
+
+      - name: Upload Tauri bundle
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ runner.os }}
+          path: ${{ steps.tauri.outputs.bundle-path }}
 ```
 
 ## Usage
 
-Build a Tauri app given the frontend artifacts can be found at `dist`:
+Build a Tauri app given the frontend artifacts are at `dist`:
 
 ```yaml
 - uses: remarkablemark/tauri-action@v1
   with:
     app-name: My App Name
 ```
-
-The Tauri bundle is located at `src-tauri/target/release/bundle/`.
 
 See [action.yml](action.yml)
 
@@ -149,6 +159,24 @@ See [action.yml](action.yml)
 - uses: remarkablemark/tauri-action@v1
   with:
     tauri-version: 2
+```
+
+## Outputs
+
+### `bundle-path`
+
+The Tauri bundle path (`src-tauri/target/release/bundle`):
+
+```yaml
+- uses: remarkablemark/tauri-action@v1
+  id: tauri
+  with:
+    app-name: My App
+
+- uses: actions/upload-artifact@v6
+  with:
+    name: ${{ runner.os }}
+    path: ${{ steps.tauri.outputs.bundle-path }}
 ```
 
 ## License

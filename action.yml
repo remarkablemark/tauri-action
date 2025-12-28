@@ -35,6 +35,11 @@ inputs:
     description: Tauri version
     default: 2
 
+outputs:
+  bundle-path:
+    description: Tauri bundle directory
+    value: ${{ steps.tauri-bundle.outputs.bundle_path }}
+
 runs:
   using: composite
   steps:
@@ -102,9 +107,14 @@ runs:
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-    - name: Build app and generate bundles
+    - name: Build app and generate bundle
       shell: bash
       run: tauri build --ci
+
+    - name: Output Tauri bundle path
+      id: tauri-bundle
+      shell: bash
+      run: echo "bundle_path=$(realpath src-tauri/target/release/bundle)" >> $GITHUB_OUTPUT
 
 branding:
   icon: link

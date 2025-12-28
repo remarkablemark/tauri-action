@@ -53,6 +53,7 @@ jobs:
           ls src-tauri/target/release/bundle/*
 
       - name: Run action with inputs
+        id: tauri
         uses: ./
         with:
           app-name: Test App Name
@@ -94,10 +95,14 @@ jobs:
             exit 1
           fi
 
-          ls src-tauri/target/release/bundle/*
+          if [[ "${{ steps.tauri.outputs.bundle-path }}" != *'src-tauri/target/release/bundle' ]]; then
+            echo 'Tauri bundle path does not match. See below:'
+            ls src-tauri/target/release/bundle/*
+            exit 1
+          fi
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v6
         with:
           name: ${{ runner.os }}
-          path: src-tauri/target/release/bundle
+          path: ${{ steps.tauri.outputs.bundle-path }}
