@@ -31,6 +31,7 @@ inputs:
     default: false
   identifier:
     description: Bundle identifier that must be unique across applications
+    default: com.${{ github.repository_owner }}.${{ github.event.repository.name }}
   tauri-version:
     description: Tauri version
     default: 2
@@ -68,9 +69,8 @@ runs:
     - name: Update Tauri config
       shell: bash
       run: |
-        if [[ -z $IDENTIFIER ]]; then
-          export IDENTIFIER="com.${{ github.repository_owner }}.${GITHUB_REPOSITORY#*/}"
-        fi
+        TAURI_CONF=src-tauri/tauri.conf.json
+        TAURI_CONF_BAK=$TAURI_CONF.bak
 
         jq \
           --arg version $VERSION \
@@ -78,9 +78,9 @@ runs:
           --argjson width $WIDTH \
           --argjson height $HEIGHT \
           '.version = $version | .identifier = $identifier | .app.windows[0].width = $width | .app.windows[0].height = $height' \
-          src-tauri/tauri.conf.json > $RUNNER_TEMP/tauri.conf.json
+          $TAURI_CONF > $TAURI_CONF_BAK
 
-        mv $RUNNER_TEMP/tauri.conf.json src-tauri/tauri.conf.json
+        mv $TAURI_CONF_BAK $TAURI_CONF
       env:
         VERSION: ${{ inputs.app-version }}
         IDENTIFIER: ${{ inputs.identifier }}
