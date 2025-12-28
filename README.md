@@ -179,6 +179,24 @@ The Tauri bundle path (`src-tauri/target/release/bundle`):
     path: ${{ steps.tauri.outputs.bundle-path }}
 ```
 
+## FAQ
+
+### macOS app is damaged
+
+If you get the error when opening your macOS app:
+
+> "Your App" is damaged and can't be opened. You should move it to the Trash.
+
+Then configure [ad-hoc signing](https://tauri.app/distribute/sign/macos/#ad-hoc-signing):
+
+```yml
+- name: uses: remarkablemark/tauri-action@v1
+  with:
+    app-name: My App
+  env:
+    APPLE_SIGNING_IDENTITY: '-'
+```
+
 ## License
 
 [MIT](LICENSE)
