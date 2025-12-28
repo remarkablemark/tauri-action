@@ -68,8 +68,8 @@ runs:
     - name: Update Tauri config
       shell: bash
       run: |
-        if [[ -z "$IDENTIFIER" ]]; then
-          IDENTIFIER="com.${{ github.repository_owner }}.${GITHUB_REPOSITORY#*/}"
+        if [[ -z $IDENTIFIER ]]; then
+          export IDENTIFIER="com.${{ github.repository_owner }}.${GITHUB_REPOSITORY#*/}"
         fi
 
         jq \
