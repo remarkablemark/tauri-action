@@ -121,14 +121,14 @@ See [action.yml](action.yml)
     no-sign: true
 ```
 
-### `cli-version`
+### `tauri-version`
 
-**Optional**: The [CLI version](https://www.npmjs.com/package/@tauri-apps/cli?activeTab=versions). Defaults to `2`:
+**Optional**: The Tauri version (used by the [CLI](https://www.npmjs.com/package/@tauri-apps/cli)). Defaults to `2`:
 
 ```yaml
 - uses: remarkablemark/tauri-action@v1
   with:
-    cli-version: 2
+    tauri-version: 2
 ```
 
 ## License

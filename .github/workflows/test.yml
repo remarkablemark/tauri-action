@@ -62,7 +62,7 @@ jobs:
           force: true
           identifier: org.remarkablemark.test
           no-sign: true
-          cli-version: 2.9.0
+          tauri-version: 2.9.0
 
       - name: Assert outputs
         shell: bash

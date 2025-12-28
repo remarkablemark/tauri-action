@@ -25,8 +25,8 @@ inputs:
   no-sign:
     description: Skip code signing when bundling the app
     default: false
-  cli-version:
-    description: Tauri CLI version
+  tauri-version:
+    description: Tauri version
     default: 2
 
 runs:
@@ -34,9 +34,9 @@ runs:
   steps:
     - name: Install Tauri CLI
       shell: bash
-      run: npm install --global "@tauri-apps/cli@$CLI_VERSION"
+      run: npm install --global "@tauri-apps/cli@$VERSION"
       env:
-        CLI_VERSION: ${{ inputs.cli-version }}
+        VERSION: ${{ inputs.tauri-version }}
 
     - name: Initialize Tauri project
       shell: bash
