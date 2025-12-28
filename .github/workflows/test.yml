@@ -58,6 +58,8 @@ jobs:
           app-name: Test App Name
           app-version: 1.2.3
           window-title: Test Window Title
+          window-width: 1024
+          window-height: 768
           tauri-path: .
           frontend-dist: ../dist
           before-build-command: echo test
@@ -81,6 +83,8 @@ jobs:
             "$(jq -r .productName $TAURI_CONF)" != 'Test App Name'
             && "$(jq -r .version $TAURI_CONF)" != '1.2.3'
             && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test Window Title'
+            && "$(jq -r '.app.windows[0].width' $TAURI_CONF)" != '1024'
+            && "$(jq -r '.app.windows[0].height' $TAURI_CONF)" != '768'
             && "$(jq -r .identifier $TAURI_CONF)" != 'org.remarkablemark.test'
             && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
             && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'echo test'
