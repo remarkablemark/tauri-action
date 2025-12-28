@@ -27,13 +27,15 @@ jobs:
 
 ## Usage
 
-**Basic:**
+Build a Tauri app given the frontend artifacts can be found at `dist`:
 
 ```yaml
 - uses: remarkablemark/tauri-action@v1
   with:
     app-name: My App Name
 ```
+
+The Tauri bundle is located at `src-tauri/target/release/bundle/`.
 
 See [action.yml](action.yml)
 
@@ -99,14 +101,24 @@ See [action.yml](action.yml)
     force: true
 ```
 
-### `cli-version`
+### `identifier`
 
-**Optional**: The [CLI version](https://www.npmjs.com/package/@tauri-apps/cli?activeTab=versions). Defaults to `2`:
+**Optional**: The application [identifier](https://tauri.app/reference/config/#identifier) in reverse domain name notation (e.g. `com.tauri.example`). Defaults to `com.<owner>.<repo>`:
 
 ```yaml
 - uses: remarkablemark/tauri-action@v1
   with:
-    cli-version: 2
+    identifier: com.tauri.example
+```
+
+### `tauri-version`
+
+**Optional**: The Tauri version (used by the [CLI](https://www.npmjs.com/package/@tauri-apps/cli)). Defaults to `2`:
+
+```yaml
+- uses: remarkablemark/tauri-action@v1
+  with:
+    tauri-version: 2
 ```
 
 ## License
