@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="tauri-logo.svg" width="150" alt="Tauri logo">
+</p>
+
 # tauri-action
 
 [![version](https://badgen.net/github/release/remarkablemark/tauri-action)](https://github.com/remarkablemark/tauri-action/releases)
