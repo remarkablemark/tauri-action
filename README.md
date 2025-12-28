@@ -101,6 +101,16 @@ See [action.yml](action.yml)
     force: true
 ```
 
+### `identifier`
+
+**Optional**: The application [identifier](https://tauri.app/reference/config/#identifier) in reverse domain name notation (e.g. `com.tauri.example`). Defaults to `com.<owner>.<repo>`:
+
+```yaml
+- uses: remarkablemark/tauri-action@v1
+  with:
+    identifier: com.tauri.example
+```
+
 ### `no-sign`
 
 **Optional**: Skip code signing when bundling the app. Defaults to `false`:

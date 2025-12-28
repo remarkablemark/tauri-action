@@ -34,6 +34,7 @@ jobs:
           if [[
             "$(jq -r .productName $TAURI_CONF)" != 'Test App Name'
             && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test App Name'
+            && "$(jq -r .identifier $TAURI_CONF)" != 'com.remarkablemark.tauri-action'
             && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
             && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'exit 0'
           ]]; then
@@ -53,6 +54,7 @@ jobs:
           frontend-dist: ../build
           before-build-command: npm run build
           force: true
+          identifier: org.remarkablemark.test
           no-sign: true
           cli-version: 2.9.0
 
@@ -70,6 +72,7 @@ jobs:
           if [[
             "$(jq -r .productName $TAURI_CONF)" != 'Test App Name'
             && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test Window Title'
+            && "$(jq -r .identifier $TAURI_CONF)" != 'org.remarkablemark.test'
             && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../build'
             && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'npm run build'
           ]]; then
