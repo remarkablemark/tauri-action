@@ -4,6 +4,9 @@ on: [push, pull_request]
 permissions:
   contents: read
 
+env:
+  TAURI_CONF: src-tauri/tauri.conf.json
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -35,8 +38,6 @@ jobs:
             exit 1
           fi
 
-          TAURI_CONF=src-tauri/tauri.conf.json
-
           if [[
             "$(jq -r .productName $TAURI_CONF)" != 'Test App Name'
             && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test App Name'
@@ -55,6 +56,7 @@ jobs:
         uses: ./
         with:
           app-name: Test App Name
+          app-version: 1.2.3
           window-title: Test Window Title
           tauri-path: .
           frontend-dist: ../dist
@@ -75,10 +77,9 @@ jobs:
             exit 1
           fi
 
-          TAURI_CONF=src-tauri/tauri.conf.json
-
           if [[
             "$(jq -r .productName $TAURI_CONF)" != 'Test App Name'
+            && "$(jq -r .version $TAURI_CONF)" != '1.2.3'
             && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test Window Title'
             && "$(jq -r .identifier $TAURI_CONF)" != 'org.remarkablemark.test'
             && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'

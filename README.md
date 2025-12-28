@@ -51,6 +51,16 @@ See [action.yml](action.yml)
     app-name: My App Name
 ```
 
+### `app-version`
+
+**Optional**: Your application version. Defaults to `0.1.0`:
+
+```yaml
+- uses: remarkablemark/tauri-action@v1
+  with:
+    app-version: 0.1.0
+```
+
 ### `window-title`
 
 **Optional**: The window title of your Tauri application. Defaults to app name:
