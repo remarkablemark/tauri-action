@@ -27,13 +27,15 @@ jobs:
 
 ## Usage
 
-**Basic:**
+Build a Tauri app given the frontend artifacts can be found at `dist`:
 
 ```yaml
 - uses: remarkablemark/tauri-action@v1
   with:
     app-name: My App Name
 ```
+
+The Tauri bundle is located at `src-tauri/target/release/bundle/`.
 
 See [action.yml](action.yml)
 
@@ -97,6 +99,16 @@ See [action.yml](action.yml)
 - uses: remarkablemark/tauri-action@v1
   with:
     force: true
+```
+
+### `no-sign`
+
+**Optional**: Skip code signing when bundling the app. Defaults to `false`:
+
+```yaml
+- uses: remarkablemark/tauri-action@v1
+  with:
+    no-sign: true
 ```
 
 ### `cli-version`

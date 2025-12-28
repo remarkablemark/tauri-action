@@ -42,6 +42,8 @@ jobs:
             exit 1
           fi
 
+          ls src-tauri/target/release/bundle/*
+
       - name: Run action with inputs
         uses: ./
         with:
@@ -51,12 +53,13 @@ jobs:
           frontend-dist: ../build
           before-build-command: npm run build
           force: true
-          cli-version: 2.8.4
+          no-sign: true
+          cli-version: 2.9.0
 
       - name: Assert outputs
         shell: bash
         run: |
-          if [[ "$(tauri --version)" != 'tauri-cli 2.8.4' ]]; then
+          if [[ "$(tauri --version)" != 'tauri-cli 2.9.0' ]]; then
             echo 'Version does not match. See version below:'
             tauri --version
             exit 1
@@ -74,3 +77,5 @@ jobs:
             cat TAURI_CONF
             exit 1
           fi
+
+          ls src-tauri/target/release/bundle/*
