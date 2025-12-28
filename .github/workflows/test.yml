@@ -15,6 +15,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Create web assets
+        shell: bash
+        run: |
+          mkdir -p dist
+          echo '<h1>Test App</h1>' > dist/index.html
+
       - name: Run action
         uses: ./
         with:
@@ -39,7 +45,7 @@ jobs:
             && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'exit 0'
           ]]; then
             echo 'Tauri configuration does not match. See JSON below:'
-            cat TAURI_CONF
+            cat $TAURI_CONF
             exit 1
           fi
 
@@ -51,8 +57,8 @@ jobs:
           app-name: Test App Name
           window-title: Test Window Title
           tauri-path: .
-          frontend-dist: ../build
-          before-build-command: npm run build
+          frontend-dist: ../dist
+          before-build-command: echo test
           force: true
           identifier: org.remarkablemark.test
           no-sign: true
@@ -73,12 +79,18 @@ jobs:
             "$(jq -r .productName $TAURI_CONF)" != 'Test App Name'
             && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test Window Title'
             && "$(jq -r .identifier $TAURI_CONF)" != 'org.remarkablemark.test'
-            && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../build'
-            && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'npm run build'
+            && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
+            && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'echo test'
           ]]; then
             echo 'Tauri configuration does not match. See JSON below:'
-            cat TAURI_CONF
+            cat $TAURI_CONF
             exit 1
           fi
 
           ls src-tauri/target/release/bundle/*
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ runner.os }}
+          path: src-tauri/target/release/bundle
