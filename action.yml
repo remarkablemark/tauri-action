@@ -54,10 +54,10 @@ runs:
       shell: bash
       run: >
         tauri init
-        --app-name "$APP_NAME"
-        --window-title "$WINDOW_NAME"
-        --frontend-dist "$FRONTEND_DIST"
-        --before-build-command "$BEFORE_BUILD_COMMAND"
+        --app-name $APP_NAME
+        --window-title $WINDOW_NAME
+        --frontend-dist $FRONTEND_DIST
+        --before-build-command $BEFORE_BUILD_COMMAND
         --ci
         ${{ inputs.force == 'true' && '--force' || '' }}
       env:
