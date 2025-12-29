@@ -4,7 +4,7 @@
 
 # tauri-action
 
-[![version](https://badgen.net/github/release/remarkablemark/tauri-action)](https://github.com/remarkablemark/tauri-action/releases)
+[![GitHub Release](https://img.shields.io/github/v/release/remarkablemark/tauri-action)](https://github.com/remarkablemark/tauri-action/releases)
 [![test](https://github.com/remarkablemark/tauri-action/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablemark/tauri-action/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
