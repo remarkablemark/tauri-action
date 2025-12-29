@@ -25,6 +25,7 @@ jobs:
           echo '<h1>Test App</h1>' > dist/index.html
 
       - name: Run action
+        id: test1
         uses: ./
         with:
           app-name: Test App Name
@@ -50,10 +51,14 @@ jobs:
             exit 1
           fi
 
-          ls src-tauri/target/release/bundle/*
+          if [[ "${{ steps.test1.outputs.bundle-path }}" != 'src-tauri/target/release/bundle' ]]; then
+            echo 'Tauri bundle path does not match. See below:'
+            ls ${{ steps.test1.outputs.bundle-path }}/*
+            exit 1
+          fi
 
       - name: Run action with inputs
-        id: tauri
+        id: test2
         uses: ./
         with:
           app-name: Test App Name
@@ -95,9 +100,9 @@ jobs:
             exit 1
           fi
 
-          if [[ "${{ steps.tauri.outputs.bundle-path }}" != *'src-tauri/target/release/bundle' ]]; then
+          if [[ "${{ steps.test2.outputs.bundle-path }}" != 'src-tauri/target/release/bundle' ]]; then
             echo 'Tauri bundle path does not match. See below:'
-            ls src-tauri/target/release/bundle/*
+            ls ${{ steps.test2.outputs.bundle-path }}/*
             exit 1
           fi
 
@@ -105,4 +110,4 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: ${{ runner.os }}
-          path: ${{ steps.tauri.outputs.bundle-path }}
+          path: ${{ steps.test2.outputs.bundle-path }}
