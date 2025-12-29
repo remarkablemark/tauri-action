@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/remarkablemark/tauri-action/compare/v1.0.3...v1.0.4) (2025-12-29)
+
+
+### Bug Fixes
+
+* **action:** don't use realpath of `bundle-path` ([#14](https://github.com/remarkablemark/tauri-action/issues/14)) ([3f4a4e8](https://github.com/remarkablemark/tauri-action/commit/3f4a4e8ac8eed777919712dd8bda023d6a0daecc))
+
 ## [1.0.3](https://github.com/remarkablemark/tauri-action/compare/v1.0.2...v1.0.3) (2025-12-28)
 
 
