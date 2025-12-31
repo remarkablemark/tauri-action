@@ -73,7 +73,7 @@ See [action.yml](action.yml)
 
 ### `window-title`
 
-**Optional**: The window title of your Tauri application. Defaults to app name:
+**Optional**: The window title of your Tauri application. Defaults to the app name:
 
 ```yaml
 - uses: remarkablemark/tauri-action@v1
@@ -98,7 +98,7 @@ See [action.yml](action.yml)
 ```yaml
 - uses: remarkablemark/tauri-action@v1
   with:
-    window-height: 800
+    window-height: 600
 ```
 
 ### `tauri-path`
