@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/remarkablemark/tauri-action/compare/v1.0.4...v1.0.5) (2025-12-31)
+
+
+### Code Refactoring
+
+* **action:** remove redundant inputs default and tidy steps ([#16](https://github.com/remarkablemark/tauri-action/issues/16)) ([6944b32](https://github.com/remarkablemark/tauri-action/commit/6944b328db7bfc2c2036486d439791d4e13eda36))
+
 ## [1.0.4](https://github.com/remarkablemark/tauri-action/compare/v1.0.3...v1.0.4) (2025-12-29)
 
 
