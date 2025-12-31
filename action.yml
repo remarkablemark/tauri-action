@@ -8,27 +8,22 @@ inputs:
     required: true
   app-version:
     description: Your application version
-    default: 0.1.0
   window-title:
     description: Window title of your Tauri application (defaults to app name)
   window-width:
     description: Window width of your Tauri application
-    default: 800
   window-height:
     description: Window height of your Tauri application
-    default: 600
   tauri-path:
     description: Path of the Tauri project to use (relative to the cwd)
-    default: .
   frontend-dist:
     description: Web assets location, relative to <project-dir>/src-tauri
-    default: ../dist
   before-build-command:
     description: A shell command to run before `tauri build` kicks in
     default: exit 0
   force:
     description: Force init to overwrite the src-tauri folder
-    default: false
+    type: boolean
   identifier:
     description: Bundle identifier that must be unique across applications
     default: com.${{ github.repository_owner }}.${{ github.event.repository.name }}
@@ -54,36 +49,38 @@ runs:
       shell: bash
       run: >
         tauri init
-        --app-name "$APP_NAME"
-        --window-title "$WINDOW_NAME"
-        --frontend-dist "$FRONTEND_DIST"
-        --before-build-command "$BEFORE_BUILD_COMMAND"
+        --app-name=${{ toJSON(inputs.app-name) }}
+        --window-title=${{ toJSON(inputs.window-name || inputs.app-name) }}
+        ${{ inputs.frontend-dist && format('--frontend-dist={0}', toJSON(inputs.frontend-dist)) || '' }}
+        --before-build-command=${{ toJSON(inputs.before-build-command) }}
         --ci
         ${{ inputs.force == 'true' && '--force' || '' }}
-      env:
-        APP_NAME: ${{ inputs.app-name }}
-        WINDOW_NAME: ${{ inputs.window-name || inputs.app-name }}
-        FRONTEND_DIST: ${{ inputs.frontend-dist }}
-        BEFORE_BUILD_COMMAND: ${{ inputs.before-build-command }}
 
     - name: Update Tauri config
       shell: bash
       run: |
-        TAURI_CONF=src-tauri/tauri.conf.json
-        TAURI_CONF_BAK=$TAURI_CONF.bak
+        CONF=src-tauri/tauri.conf.json
+        TEMP=$RUNNER_TEMP/tauri.conf.json
 
-        jq \
-          --arg version $VERSION \
-          --arg identifier $IDENTIFIER \
-          --argjson width $WIDTH \
-          --argjson height $HEIGHT \
-          '.version = $version | .identifier = $identifier | .app.windows[0].width = $width | .app.windows[0].height = $height' \
-          $TAURI_CONF > $TAURI_CONF_BAK
+        if [[ $VERSION ]]; then
+          jq ".version = \"$VERSION\"" $CONF > $TEMP
+          mv $TEMP $CONF
+        fi
 
-        mv $TAURI_CONF_BAK $TAURI_CONF
+        if [[ $WIDTH ]]; then
+          jq ".app.windows[0].width = $WIDTH" $CONF > $TEMP
+          mv $TEMP $CONF
+        fi
+
+        if [[ $HEIGHT ]]; then
+          jq ".app.windows[0].height = $HEIGHT" $CONF > $TEMP
+          mv $TEMP $CONF
+        fi
+
+        jq '.identifier = ${{ toJSON(inputs.identifier) }}' $CONF > $TEMP
+        mv $TEMP $CONF
       env:
         VERSION: ${{ inputs.app-version }}
-        IDENTIFIER: ${{ inputs.identifier }}
         WIDTH: ${{ inputs.window-width }}
         HEIGHT: ${{ inputs.window-height }}
 
