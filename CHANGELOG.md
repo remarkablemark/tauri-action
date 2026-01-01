@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6](https://github.com/remarkablemark/tauri-action/compare/v1.0.5...v1.0.6) (2026-01-01)
+
+
+### Bug Fixes
+
+* **action:** set Windows `bundle-path` to `src-tauri\target\release\bundle` ([#18](https://github.com/remarkablemark/tauri-action/issues/18)) ([043d383](https://github.com/remarkablemark/tauri-action/commit/043d3837ec274d68acc0675c2e6cff2663f46b00))
+
 ## [1.0.5](https://github.com/remarkablemark/tauri-action/compare/v1.0.4...v1.0.5) (2025-12-31)
 
 
