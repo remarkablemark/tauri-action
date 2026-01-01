@@ -165,7 +165,7 @@ See [action.yml](action.yml)
 
 ### `bundle-path`
 
-The Tauri bundle path (`src-tauri/target/release/bundle`):
+The path to the Tauri bundle directory:
 
 ```yaml
 - uses: remarkablemark/tauri-action@v1
@@ -178,6 +178,10 @@ The Tauri bundle path (`src-tauri/target/release/bundle`):
     name: ${{ runner.os }}
     path: ${{ steps.tauri.outputs.bundle-path }}
 ```
+
+> [!NOTE]
+> On Linux/macOS, the bundle path is `src-tauri/target/release/bundle`.
+> On Windows, the bundle path is `src-tauri\target\release\bundle`.
 
 ## FAQ
 

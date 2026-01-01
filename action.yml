@@ -109,7 +109,12 @@ runs:
     - name: Output Tauri bundle path
       id: tauri-bundle
       shell: bash
-      run: echo 'bundle_path=src-tauri/target/release/bundle' >> $GITHUB_OUTPUT
+      run: |
+        if [[ $RUNNER_OS == 'Windows' ]]; then
+          echo 'bundle_path=src-tauri\target\release\bundle' >> $GITHUB_OUTPUT
+        else
+          echo 'bundle_path=src-tauri/target/release/bundle' >> $GITHUB_OUTPUT
+        fi
 
 branding:
   icon: link
