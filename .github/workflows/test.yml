@@ -51,11 +51,19 @@ jobs:
             exit 1
           fi
 
-          if [[ "${{ steps.test1.outputs.bundle-path }}" != 'src-tauri/target/release/bundle' ]]; then
-            echo 'Tauri bundle path does not match. See below:'
-            ls ${{ steps.test1.outputs.bundle-path }}/*
+          BUNDLE_PATH='${{ steps.test1.outputs.bundle-path }}'
+
+          if [[
+            ($RUNNER_OS != 'Windows' && $BUNDLE_PATH != 'src-tauri/target/release/bundle')
+            || ($RUNNER_OS == 'Windows' && $BUNDLE_PATH != 'src-tauri\target\release\bundle')
+          ]]; then
+            echo 'Tauri bundle path does not match.'
             exit 1
           fi
+
+      - name: List bundle contents
+        working-directory: ${{ steps.test1.outputs.bundle-path }}
+        run: ls *
 
       - name: Run action with inputs
         id: test2
@@ -100,11 +108,19 @@ jobs:
             exit 1
           fi
 
-          if [[ "${{ steps.test2.outputs.bundle-path }}" != 'src-tauri/target/release/bundle' ]]; then
-            echo 'Tauri bundle path does not match. See below:'
-            ls ${{ steps.test2.outputs.bundle-path }}/*
+          BUNDLE_PATH='${{ steps.test2.outputs.bundle-path }}'
+
+          if [[
+            ($RUNNER_OS != 'Windows' && $BUNDLE_PATH != 'src-tauri/target/release/bundle')
+            || ($RUNNER_OS == 'Windows' && $BUNDLE_PATH != 'src-tauri\target\release\bundle')
+          ]]; then
+            echo 'Tauri bundle path does not match.'
             exit 1
           fi
+
+      - name: List bundle contents
+        working-directory: ${{ steps.test2.outputs.bundle-path }}
+        run: ls *
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v6
