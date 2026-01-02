@@ -33,6 +33,9 @@ inputs:
   identifier:
     description: Bundle identifier that must be unique across applications
     default: com.${{ github.repository_owner }}.${{ github.event.repository.name }}
+  icon-path:
+    description: Path to the source icon (squared PNG or SVG file with transparency) or a manifest file
+    default: app-icon.png
   tauri-version:
     description: Tauri version
     default: 2
@@ -119,6 +122,10 @@ runs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Generate icons
+      shell: bash
+      run: tauri icon ${{ toJSON(inputs.icon-path) }} || true
 
     - name: Build app and generate bundle
       shell: bash
