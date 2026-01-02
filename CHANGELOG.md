@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/remarkablemark/tauri-action/compare/v1.0.6...v1.1.0) (2026-01-02)
+
+
+### Features
+
+* **action:** add input `fullscreen` ([f49274f](https://github.com/remarkablemark/tauri-action/commit/f49274f85ed2ad72275abc3b95e3fce0369565fc))
+* **action:** add input `resizable` ([0d3abea](https://github.com/remarkablemark/tauri-action/commit/0d3abea3335f01e64cc9f7ee293343efc9e58ed6))
+
 ## [1.0.6](https://github.com/remarkablemark/tauri-action/compare/v1.0.5...v1.0.6) (2026-01-01)
 
 
