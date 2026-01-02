@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/remarkablemark/tauri-action/compare/v1.1.0...v1.2.0) (2026-01-02)
+
+
+### Features
+
+* **action:** add input `icon-path` ([987e116](https://github.com/remarkablemark/tauri-action/commit/987e1169350a5631e4d483e42280cfe89621a9a3))
+
+
+### Bug Fixes
+
+* **action:** fix window title ([e4b920f](https://github.com/remarkablemark/tauri-action/commit/e4b920f4f94a03d54c9d11e8d9555ee66ba4463d))
+
 ## [1.1.0](https://github.com/remarkablemark/tauri-action/compare/v1.0.6...v1.1.0) (2026-01-02)
 
 
