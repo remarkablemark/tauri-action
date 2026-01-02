@@ -83,7 +83,7 @@ See [action.yml](action.yml)
 
 ### `window-width`
 
-**Optional**: The window width of your Tauri application. Defaults to `800` pixels:
+**Optional**: The window width in logical pixels. Defaults to `800`:
 
 ```yaml
 - uses: remarkablemark/tauri-action@v1
@@ -93,13 +93,36 @@ See [action.yml](action.yml)
 
 ### `window-height`
 
-**Optional**: The window height of your Tauri application. Defaults to `600` pixels:
+**Optional**: The window height in logical pixels. Defaults to `600`:
 
 ```yaml
 - uses: remarkablemark/tauri-action@v1
   with:
     window-height: 600
 ```
+
+### `window-fullscreen`
+
+**Optional**: Whether the window starts as fullscreen or not. Defaults to `false`:
+
+```yaml
+- uses: remarkablemark/tauri-action@v1
+  with:
+    window-fullscreen: false
+```
+
+### `window-resizable`
+
+**Optional**: Whether the window is resizable or not. Defaults to `true`:
+
+```yaml
+- uses: remarkablemark/tauri-action@v1
+  with:
+    window-resizable: true
+```
+
+> [!NOTE]
+> When resizable is set to `false`, the native window's maximize button is automatically disabled.
 
 ### `tauri-path`
 
@@ -138,7 +161,7 @@ See [action.yml](action.yml)
 ```yaml
 - uses: remarkablemark/tauri-action@v1
   with:
-    force: true
+    force: false
 ```
 
 ### `identifier`

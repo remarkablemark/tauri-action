@@ -41,7 +41,12 @@ jobs:
 
           if [[
             "$(jq -r .productName $TAURI_CONF)" != 'Test App Name'
+            && "$(jq -r .version $TAURI_CONF)" != '0.1.0'
             && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test App Name'
+            && "$(jq -r '.app.windows[0].width' $TAURI_CONF)" != '800'
+            && "$(jq -r '.app.windows[0].height' $TAURI_CONF)" != '600'
+            && "$(jq -r '.app.windows[0].resizable' $TAURI_CONF)" != 'true'
+            && "$(jq -r '.app.windows[0].fullscreen' $TAURI_CONF)" != 'false'
             && "$(jq -r .identifier $TAURI_CONF)" != 'com.remarkablemark.tauri-action'
             && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
             && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'exit 0'
@@ -65,6 +70,12 @@ jobs:
         working-directory: ${{ steps.test1.outputs.bundle-path }}
         run: ls *
 
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ runner.os }}-test1
+          path: ${{ steps.test1.outputs.bundle-path }}
+
       - name: Run action with inputs
         id: test2
         uses: ./
@@ -74,6 +85,8 @@ jobs:
           window-title: Test Window Title
           window-width: 1024
           window-height: 768
+          window-resizable: false
+          window-fullscreen: true
           tauri-path: .
           frontend-dist: ../dist
           before-build-command: echo test
@@ -99,6 +112,8 @@ jobs:
             && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test Window Title'
             && "$(jq -r '.app.windows[0].width' $TAURI_CONF)" != '1024'
             && "$(jq -r '.app.windows[0].height' $TAURI_CONF)" != '768'
+            && "$(jq -r '.app.windows[0].resizable' $TAURI_CONF)" != 'false'
+            && "$(jq -r '.app.windows[0].fullscreen' $TAURI_CONF)" != 'true'
             && "$(jq -r .identifier $TAURI_CONF)" != 'org.remarkablemark.test'
             && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
             && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'echo test'
@@ -125,5 +140,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v6
         with:
-          name: ${{ runner.os }}
+          name: ${{ runner.os }}-test2
           path: ${{ steps.test2.outputs.bundle-path }}
