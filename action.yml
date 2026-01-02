@@ -14,6 +14,9 @@ inputs:
     description: Window width of your Tauri application
   window-height:
     description: Window height of your Tauri application
+  window-fullscreen:
+    description: Whether the window starts as fullscreen or not
+    type: boolean
   tauri-path:
     description: Path of the Tauri project to use (relative to the cwd)
   frontend-dist:
@@ -77,12 +80,18 @@ runs:
           mv $TEMP $CONF
         fi
 
+        if [[ $FULLSCREEN ]]; then
+          jq ".app.windows[0].fullscreen = $FULLSCREEN" $CONF > $TEMP
+          mv $TEMP $CONF
+        fi
+
         jq '.identifier = ${{ toJSON(inputs.identifier) }}' $CONF > $TEMP
         mv $TEMP $CONF
       env:
         VERSION: ${{ inputs.app-version }}
         WIDTH: ${{ inputs.window-width }}
         HEIGHT: ${{ inputs.window-height }}
+        FULLSCREEN: ${{ inputs.window-fullscreen }}
 
     - name: Install Linux dependencies
       if: runner.os == 'Linux'
