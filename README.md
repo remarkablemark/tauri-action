@@ -175,6 +175,35 @@ See [action.yml](action.yml)
     identifier: com.tauri.example
 ```
 
+### `icon-path`
+
+**Optional**: The path to the source icon (squared PNG or SVG file with transparency) or a manifest file. Defaults to `app-icon.png`:
+
+```yaml
+- uses: remarkablemark/tauri-action@v1
+  with:
+    icon-path: app-icon.png
+```
+
+> [!NOTE]
+>
+> The source image (PNG or SVG) must be square (width and height are equal).
+
+The manifest file is a JSON file with the following structure:
+
+```json
+{
+  "default": "app-icon.png",
+  "bg_color": "#fff",
+  "android_bg": "app-icon-bg.png",
+  "android_fg": "app-icon-fg.png",
+  "android_fg_scale": 85,
+  "android_monochrome": "app-icon-monochrome.png"
+}
+```
+
+All file paths defined in the manifest JSON are relative to the manifest file path and only the `default` manifest property is required.
+
 ### `tauri-version`
 
 **Optional**: The Tauri version (used by the [CLI](https://www.npmjs.com/package/@tauri-apps/cli)). Defaults to `2`:

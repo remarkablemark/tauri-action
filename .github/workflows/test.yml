@@ -41,15 +41,15 @@ jobs:
 
           if [[
             "$(jq -r .productName $TAURI_CONF)" != 'Test App Name'
-            && "$(jq -r .version $TAURI_CONF)" != '0.1.0'
-            && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test App Name'
-            && "$(jq -r '.app.windows[0].width' $TAURI_CONF)" != '800'
-            && "$(jq -r '.app.windows[0].height' $TAURI_CONF)" != '600'
-            && "$(jq -r '.app.windows[0].resizable' $TAURI_CONF)" != 'true'
-            && "$(jq -r '.app.windows[0].fullscreen' $TAURI_CONF)" != 'false'
-            && "$(jq -r .identifier $TAURI_CONF)" != 'com.remarkablemark.tauri-action'
-            && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
-            && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'exit 0'
+            || "$(jq -r .version $TAURI_CONF)" != '0.1.0'
+            || "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test App Name'
+            || "$(jq -r '.app.windows[0].width' $TAURI_CONF)" != '800'
+            || "$(jq -r '.app.windows[0].height' $TAURI_CONF)" != '600'
+            || "$(jq -r '.app.windows[0].resizable' $TAURI_CONF)" != 'true'
+            || "$(jq -r '.app.windows[0].fullscreen' $TAURI_CONF)" != 'false'
+            || "$(jq -r .identifier $TAURI_CONF)" != 'com.remarkablemark.tauri-action'
+            || "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
+            || "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'exit 0'
           ]]; then
             echo 'Tauri configuration does not match. See JSON below:'
             cat $TAURI_CONF
@@ -76,13 +76,20 @@ jobs:
           name: ${{ runner.os }}-test1
           path: ${{ steps.test1.outputs.bundle-path }}
 
+      - name: Create icon
+        shell: bash
+        run: >
+          echo
+          '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4zM8 2v16M16 6v16"/></svg>'
+          > app-icon.svg
+
       - name: Run action with inputs
         id: test2
         uses: ./
         with:
           app-name: Test App Name
           app-version: 1.2.3
-          window-title: Test Window Title
+          window-title: 'Window Title: Test'
           window-width: 1024
           window-height: 768
           window-resizable: false
@@ -92,6 +99,7 @@ jobs:
           before-build-command: echo test
           force: true
           identifier: org.remarkablemark.test
+          icon-path: app-icon.svg
           tauri-version: 2.9.0
         env:
           # https://tauri.app/distribute/sign/macos/#ad-hoc-signing
@@ -108,15 +116,15 @@ jobs:
 
           if [[
             "$(jq -r .productName $TAURI_CONF)" != 'Test App Name'
-            && "$(jq -r .version $TAURI_CONF)" != '1.2.3'
-            && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test Window Title'
-            && "$(jq -r '.app.windows[0].width' $TAURI_CONF)" != '1024'
-            && "$(jq -r '.app.windows[0].height' $TAURI_CONF)" != '768'
-            && "$(jq -r '.app.windows[0].resizable' $TAURI_CONF)" != 'false'
-            && "$(jq -r '.app.windows[0].fullscreen' $TAURI_CONF)" != 'true'
-            && "$(jq -r .identifier $TAURI_CONF)" != 'org.remarkablemark.test'
-            && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
-            && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'echo test'
+            || "$(jq -r .version $TAURI_CONF)" != '1.2.3'
+            || "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Window Title: Test'
+            || "$(jq -r '.app.windows[0].width' $TAURI_CONF)" != '1024'
+            || "$(jq -r '.app.windows[0].height' $TAURI_CONF)" != '768'
+            || "$(jq -r '.app.windows[0].resizable' $TAURI_CONF)" != 'false'
+            || "$(jq -r '.app.windows[0].fullscreen' $TAURI_CONF)" != 'true'
+            || "$(jq -r .identifier $TAURI_CONF)" != 'org.remarkablemark.test'
+            || "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
+            || "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'echo test'
           ]]; then
             echo 'Tauri configuration does not match. See JSON below:'
             cat $TAURI_CONF
