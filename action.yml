@@ -59,7 +59,7 @@ runs:
       run: >
         tauri init
         --app-name=${{ toJSON(inputs.app-name) }}
-        --window-title=${{ toJSON(inputs.window-name || inputs.app-name) }}
+        --window-title=${{ toJSON(inputs.window-title || inputs.app-name) }}
         ${{ inputs.frontend-dist && format('--frontend-dist={0}', toJSON(inputs.frontend-dist)) || '' }}
         --before-build-command=${{ toJSON(inputs.before-build-command) }}
         --ci

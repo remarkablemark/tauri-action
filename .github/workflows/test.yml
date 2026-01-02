@@ -41,15 +41,15 @@ jobs:
 
           if [[
             "$(jq -r .productName $TAURI_CONF)" != 'Test App Name'
-            && "$(jq -r .version $TAURI_CONF)" != '0.1.0'
-            && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test App Name'
-            && "$(jq -r '.app.windows[0].width' $TAURI_CONF)" != '800'
-            && "$(jq -r '.app.windows[0].height' $TAURI_CONF)" != '600'
-            && "$(jq -r '.app.windows[0].resizable' $TAURI_CONF)" != 'true'
-            && "$(jq -r '.app.windows[0].fullscreen' $TAURI_CONF)" != 'false'
-            && "$(jq -r .identifier $TAURI_CONF)" != 'com.remarkablemark.tauri-action'
-            && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
-            && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'exit 0'
+            || "$(jq -r .version $TAURI_CONF)" != '0.1.0'
+            || "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Test App Name'
+            || "$(jq -r '.app.windows[0].width' $TAURI_CONF)" != '800'
+            || "$(jq -r '.app.windows[0].height' $TAURI_CONF)" != '600'
+            || "$(jq -r '.app.windows[0].resizable' $TAURI_CONF)" != 'true'
+            || "$(jq -r '.app.windows[0].fullscreen' $TAURI_CONF)" != 'false'
+            || "$(jq -r .identifier $TAURI_CONF)" != 'com.remarkablemark.tauri-action'
+            || "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
+            || "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'exit 0'
           ]]; then
             echo 'Tauri configuration does not match. See JSON below:'
             cat $TAURI_CONF
@@ -116,15 +116,15 @@ jobs:
 
           if [[
             "$(jq -r .productName $TAURI_CONF)" != 'Test App Name'
-            && "$(jq -r .version $TAURI_CONF)" != '1.2.3'
-            && "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Window Title: Test'
-            && "$(jq -r '.app.windows[0].width' $TAURI_CONF)" != '1024'
-            && "$(jq -r '.app.windows[0].height' $TAURI_CONF)" != '768'
-            && "$(jq -r '.app.windows[0].resizable' $TAURI_CONF)" != 'false'
-            && "$(jq -r '.app.windows[0].fullscreen' $TAURI_CONF)" != 'true'
-            && "$(jq -r .identifier $TAURI_CONF)" != 'org.remarkablemark.test'
-            && "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
-            && "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'echo test'
+            || "$(jq -r .version $TAURI_CONF)" != '1.2.3'
+            || "$(jq -r '.app.windows[0].title' $TAURI_CONF)" != 'Window Title: Test'
+            || "$(jq -r '.app.windows[0].width' $TAURI_CONF)" != '1024'
+            || "$(jq -r '.app.windows[0].height' $TAURI_CONF)" != '768'
+            || "$(jq -r '.app.windows[0].resizable' $TAURI_CONF)" != 'false'
+            || "$(jq -r '.app.windows[0].fullscreen' $TAURI_CONF)" != 'true'
+            || "$(jq -r .identifier $TAURI_CONF)" != 'org.remarkablemark.test'
+            || "$(jq -r .build.frontendDist $TAURI_CONF)" != '../dist'
+            || "$(jq -r .build.beforeBuildCommand $TAURI_CONF)" != 'echo test'
           ]]; then
             echo 'Tauri configuration does not match. See JSON below:'
             cat $TAURI_CONF
