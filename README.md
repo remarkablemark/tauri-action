@@ -122,6 +122,7 @@ See [action.yml](action.yml)
 ```
 
 > [!NOTE]
+>
 > When resizable is set to `false`, the native window's maximize button is automatically disabled.
 
 ### `tauri-path`
@@ -203,7 +204,9 @@ The path to the Tauri bundle directory:
 ```
 
 > [!NOTE]
-> On Linux/macOS, the bundle path is `src-tauri/target/release/bundle`.
+>
+> On Linux and macOS, the bundle path is `src-tauri/target/release/bundle`.
+>
 > On Windows, the bundle path is `src-tauri\target\release\bundle`.
 
 ## FAQ
