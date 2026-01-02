@@ -111,6 +111,19 @@ See [action.yml](action.yml)
     window-fullscreen: false
 ```
 
+### `window-resizable`
+
+**Optional**: Whether the window is resizable or not. Defaults to `true`:
+
+```yaml
+- uses: remarkablemark/tauri-action@v1
+  with:
+    window-resizable: true
+```
+
+> [!NOTE]
+> When resizable is set to `false`, the native window's maximize button is automatically disabled.
+
 ### `tauri-path`
 
 **Optional**: The path of the Tauri project to use (relative to the cwd). Defaults to `.`:

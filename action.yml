@@ -14,6 +14,9 @@ inputs:
     description: Window width of your Tauri application
   window-height:
     description: Window height of your Tauri application
+  window-resizable:
+    description: Whether the window is resizable or not
+    type: boolean
   window-fullscreen:
     description: Whether the window starts as fullscreen or not
     type: boolean
@@ -80,6 +83,11 @@ runs:
           mv $TEMP $CONF
         fi
 
+        if [[ $RESIZABLE ]]; then
+          jq ".app.windows[0].resizable = $RESIZABLE" $CONF > $TEMP
+          mv $TEMP $CONF
+        fi
+
         if [[ $FULLSCREEN ]]; then
           jq ".app.windows[0].fullscreen = $FULLSCREEN" $CONF > $TEMP
           mv $TEMP $CONF
@@ -91,6 +99,7 @@ runs:
         VERSION: ${{ inputs.app-version }}
         WIDTH: ${{ inputs.window-width }}
         HEIGHT: ${{ inputs.window-height }}
+        RESIZABLE: ${{ inputs.window-resizable }}
         FULLSCREEN: ${{ inputs.window-fullscreen }}
 
     - name: Install Linux dependencies
