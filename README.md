@@ -121,7 +121,7 @@ See [action.yml](action.yml)
     window-resizable: true
 ```
 
-> [!NOTE]
+> [!TIP]
 >
 > When resizable is set to `false`, the native window's maximize button is automatically disabled.
 
@@ -185,9 +185,9 @@ See [action.yml](action.yml)
     icon-path: app-icon.png
 ```
 
-> [!NOTE]
+> [!IMPORTANT]
 >
-> The source image (PNG or SVG) must be square (width and height are equal).
+> The source image (PNG or SVG) must be square (width and height are equal) and the recommended size is `1024` pixels.
 
 The manifest file is a JSON file with the following structure:
 
