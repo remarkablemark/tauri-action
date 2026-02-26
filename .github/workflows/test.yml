@@ -71,7 +71,7 @@ jobs:
         run: ls *
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ runner.os }}-test1
           path: ${{ steps.test1.outputs.bundle-path }}
@@ -146,7 +146,7 @@ jobs:
         run: ls *
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ runner.os }}-test2
           path: ${{ steps.test2.outputs.bundle-path }}
