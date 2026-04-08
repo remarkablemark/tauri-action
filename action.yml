@@ -68,37 +68,43 @@ runs:
     - name: Update Tauri config
       shell: bash
       run: |
-        CONF=src-tauri/tauri.conf.json
-        TEMP=$RUNNER_TEMP/tauri.conf.json
+        CONF="src-tauri/tauri.conf.json"
+        TEMP="$RUNNER_TEMP/tauri.conf.json"
 
-        if [[ $VERSION ]]; then
-          jq ".version = \"$VERSION\"" $CONF > $TEMP
-          mv $TEMP $CONF
+        if [[ "$APP_NAME" ]]; then
+          jq ".productName = \"$APP_NAME\"" "$CONF" > "$TEMP"
+          mv "$TEMP" "$CONF"
         fi
 
-        if [[ $WIDTH ]]; then
-          jq ".app.windows[0].width = $WIDTH" $CONF > $TEMP
-          mv $TEMP $CONF
+        if [[ "$VERSION" ]]; then
+          jq ".version = \"$VERSION\"" "$CONF" > "$TEMP"
+          mv "$TEMP" "$CONF"
         fi
 
-        if [[ $HEIGHT ]]; then
-          jq ".app.windows[0].height = $HEIGHT" $CONF > $TEMP
-          mv $TEMP $CONF
+        if [[ "$WIDTH" ]]; then
+          jq ".app.windows[0].width = $WIDTH" "$CONF" > "$TEMP"
+          mv "$TEMP" "$CONF"
         fi
 
-        if [[ $RESIZABLE ]]; then
-          jq ".app.windows[0].resizable = $RESIZABLE" $CONF > $TEMP
-          mv $TEMP $CONF
+        if [[ "$HEIGHT" ]]; then
+          jq ".app.windows[0].height = $HEIGHT" "$CONF" > "$TEMP"
+          mv "$TEMP" "$CONF"
         fi
 
-        if [[ $FULLSCREEN ]]; then
-          jq ".app.windows[0].fullscreen = $FULLSCREEN" $CONF > $TEMP
-          mv $TEMP $CONF
+        if [[ "$RESIZABLE" ]]; then
+          jq ".app.windows[0].resizable = $RESIZABLE" "$CONF" > "$TEMP"
+          mv "$TEMP" "$CONF"
         fi
 
-        jq '.identifier = ${{ toJSON(inputs.identifier) }}' $CONF > $TEMP
-        mv $TEMP $CONF
+        if [[ "$FULLSCREEN" ]]; then
+          jq ".app.windows[0].fullscreen = $FULLSCREEN" "$CONF" > "$TEMP"
+          mv "$TEMP" "$CONF"
+        fi
+
+        jq '.identifier = ${{ toJSON(inputs.identifier) }}' "$CONF" > "$TEMP"
+        mv "$TEMP" "$CONF"
       env:
+        APP_NAME: ${{ inputs.app-name }}
         VERSION: ${{ inputs.app-version }}
         WIDTH: ${{ inputs.window-width }}
         HEIGHT: ${{ inputs.window-height }}
@@ -113,7 +119,7 @@ runs:
         sudo apt-get install --yes libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
     - name: Cache Rust dependencies
-      uses: actions/cache@v5
+      uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
       with:
         path: |
           ~/.cargo/bin/
