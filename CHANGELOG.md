@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/remarkablemark/tauri-action/compare/v1.2.1...v1.2.2) (2026-04-08)
+
+
+### Bug Fixes
+
+* **action:** validate app-name input ([6f8ed32](https://github.com/remarkablemark/tauri-action/commit/6f8ed3249ce0bdbbeb195c25b03117695e82ed4b))
+
 ## [1.2.1](https://github.com/remarkablemark/tauri-action/compare/v1.2.0...v1.2.1) (2026-04-08)
 
 
