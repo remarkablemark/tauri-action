@@ -48,6 +48,21 @@ outputs:
 runs:
   using: composite
   steps:
+    - name: Validate app-name
+      shell: bash
+      run: |
+        if [[ -z "$APP_NAME" ]]; then
+          echo "Error: app-name cannot be empty"
+          exit 1
+        fi
+
+        if [[ ! "$APP_NAME" =~ ^[^/:*?\"\<\>\|]+$ ]]; then
+          echo "Error: app-name contains invalid characters. Cannot use: / : * ? \" < > |"
+          exit 1
+        fi
+      env:
+        APP_NAME: ${{ inputs.app-name }}
+
     - name: Install Tauri CLI
       shell: bash
       run: npm install --global @tauri-apps/cli@$VERSION
@@ -70,11 +85,6 @@ runs:
       run: |
         CONF="src-tauri/tauri.conf.json"
         TEMP="$RUNNER_TEMP/tauri.conf.json"
-
-        if [[ "$APP_NAME" ]]; then
-          jq ".productName = \"$APP_NAME\"" "$CONF" > "$TEMP"
-          mv "$TEMP" "$CONF"
-        fi
 
         if [[ "$VERSION" ]]; then
           jq ".version = \"$VERSION\"" "$CONF" > "$TEMP"
@@ -104,7 +114,6 @@ runs:
         jq '.identifier = ${{ toJSON(inputs.identifier) }}' "$CONF" > "$TEMP"
         mv "$TEMP" "$CONF"
       env:
-        APP_NAME: ${{ inputs.app-name }}
         VERSION: ${{ inputs.app-version }}
         WIDTH: ${{ inputs.window-width }}
         HEIGHT: ${{ inputs.window-height }}
