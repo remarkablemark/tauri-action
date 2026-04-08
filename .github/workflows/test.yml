@@ -24,6 +24,36 @@ jobs:
           mkdir -p dist
           echo '<h1>Test App</h1>' > dist/index.html
 
+      - name: Run action with empty app-name (should fail)
+        id: test-empty-app-name
+        continue-on-error: true
+        uses: ./
+        with:
+          app-name: ""
+
+      - name: Assert empty app-name fails
+        shell: bash
+        run: |
+          if [[ "${{ steps.test-empty-app-name.outcome }}" != "failure" ]]; then
+            echo "Expected action to fail with empty app-name"
+            exit 1
+          fi
+
+      - name: Run action with invalid app-name (should fail)
+        id: test-invalid-app-name
+        continue-on-error: true
+        uses: ./
+        with:
+          app-name: "test:invalid"
+
+      - name: Assert invalid app-name fails
+        shell: bash
+        run: |
+          if [[ "${{ steps.test-invalid-app-name.outcome }}" != "failure" ]]; then
+            echo "Expected action to fail with invalid characters"
+            exit 1
+          fi
+
       - name: Run action
         id: test1
         uses: ./
