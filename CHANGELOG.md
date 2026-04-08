@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/remarkablemark/tauri-action/compare/v1.2.0...v1.2.1) (2026-04-08)
+
+
+### Bug Fixes
+
+* **action:** set productName in tauri.conf.json ([777c248](https://github.com/remarkablemark/tauri-action/commit/777c2487f772b8e32e165008fce7422b532af747))
+
 ## [1.2.0](https://github.com/remarkablemark/tauri-action/compare/v1.1.0...v1.2.0) (2026-01-02)
 
 
