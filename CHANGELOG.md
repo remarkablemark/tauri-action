@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/remarkablemark/tauri-action/compare/v1.2.2...v1.2.3) (2026-04-13)
+
+
+### Build System
+
+* **deps:** bump actions/cache from 5.0.4 to 5.0.5 ([#29](https://github.com/remarkablemark/tauri-action/issues/29)) ([bea6aa1](https://github.com/remarkablemark/tauri-action/commit/bea6aa1180d39b63cf3f9c6fff8d1302159b06e7))
+
 ## [1.2.2](https://github.com/remarkablemark/tauri-action/compare/v1.2.1...v1.2.2) (2026-04-08)
 
 
