@@ -8,7 +8,7 @@
 [![test](https://github.com/remarkablemark/tauri-action/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablemark/tauri-action/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-🔗 Build Tauri apps with GitHub Actions.
+🔗 Build [Tauri](https://tauri.app/) apps with GitHub Actions.
 
 ## Quick Start
 
