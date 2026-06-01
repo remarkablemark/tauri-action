@@ -24,6 +24,7 @@ inputs:
     description: Path of the Tauri project to use (relative to the cwd)
   frontend-dist:
     description: Web assets location, relative to <project-dir>/src-tauri
+    default: ../dist
   before-build-command:
     description: A shell command to run before `tauri build` kicks in
     default: exit 0

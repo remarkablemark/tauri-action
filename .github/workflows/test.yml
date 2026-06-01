@@ -106,6 +106,29 @@ jobs:
           name: ${{ runner.os }}-test1
           path: ${{ steps.test1.outputs.bundle-path }}
 
+      - name: Create build assets
+        shell: bash
+        run: |
+          mkdir -p build
+          echo '<h1>Test App</h1>' > build/index.html
+
+      - name: Run action with frontend-dist
+        id: test-frontend-dist
+        uses: ./
+        with:
+          app-name: Test App Name
+          frontend-dist: ../build
+          force: true
+
+      - name: Assert frontend-dist output
+        shell: bash
+        run: |
+          if [[ "$(jq -r .build.frontendDist $TAURI_CONF)" != '../build' ]]; then
+            echo 'frontendDist does not match. See JSON below:'
+            cat $TAURI_CONF
+            exit 1
+          fi
+
       - name: Create icon
         shell: bash
         run: >
@@ -119,7 +142,7 @@ jobs:
         with:
           app-name: Test App Name
           app-version: 1.2.3
-          window-title: 'Window Title: Test'
+          window-title: "Window Title: Test"
           window-width: 1024
           window-height: 768
           window-resizable: false
@@ -133,7 +156,7 @@ jobs:
           tauri-version: 2.9.0
         env:
           # https://tauri.app/distribute/sign/macos/#ad-hoc-signing
-          APPLE_SIGNING_IDENTITY: '-'
+          APPLE_SIGNING_IDENTITY: "-"
 
       - name: Assert outputs
         shell: bash
