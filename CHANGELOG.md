@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.4](https://github.com/remarkablemark/tauri-action/compare/v1.2.3...v1.2.4) (2026-06-01)
+
+
+### Bug Fixes
+
+* **action:** default frontend-dist to `../dist` ([#32](https://github.com/remarkablemark/tauri-action/issues/32)) ([97a3be7](https://github.com/remarkablemark/tauri-action/commit/97a3be759d7dd011287f90ac4793ad0c96503251))
+
 ## [1.2.3](https://github.com/remarkablemark/tauri-action/compare/v1.2.2...v1.2.3) (2026-04-13)
 
 
